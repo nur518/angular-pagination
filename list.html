@@ -1,0 +1,3 @@
+<app-pagination (pageNoEvent)="paginateHandler($event)" [totalPage]="(users$ | async).totalPage"
+  [currentPage]="(users$ | async).currentPage">
+</app-pagination>

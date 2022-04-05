@@ -1,0 +1,43 @@
+<div *ngIf="totalPage > 1" class="rounded-lg bg-white p-2 shadow-md w-fit h-auto">
+  <ul class="flex items-center space-x-1">
+    <!-- Previous Button -->
+    <li class="flex items-center">
+      <button #prevBtn [value]="currentPage - 1" (click)="paginateHandler(+prevBtn.value)" type="button"
+        class="p-2 block disabled:opacity-50" [disabled]="currentPage === 1">
+        <svg width="5" height="9" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_664_12999)">
+            <path d="M4.91797 8.16669L0.834635 4.08335L4.91797 1.89543e-05" stroke="#2A39EA" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </g>
+          <defs>
+            <clipPath id="clip0_664_12999">
+              <rect width="4.08333" height="8.16667" fill="white" transform="translate(4.91797 8.16669) rotate(-180)" />
+            </clipPath>
+          </defs>
+        </svg>
+      </button>
+    </li>
+
+    <!-- Pagination -->
+    <li *ngFor="let item of pagination(totalPage, currentPage); let i = index">
+      <button *ngIf="item === DOTS; else paginateElse"
+        class="paginate-btn text-primary text-xs font-normal p-2">&#8230;</button>
+
+      <ng-template #paginateElse>
+        <button (click)="paginateHandler(+item)" type="button" [class.active]="item === currentPage"
+          class="paginate-btn text-primary text-xs font-normal p-2">{{item}}</button>
+      </ng-template>
+    </li>
+
+    <!-- Next Button -->
+    <li class="flex items-center">
+      <button #nextBtn [value]="currentPage + 1" (click)="paginateHandler(+nextBtn.value)" type="button"
+        class="p-2 block disabled:opacity-50" [disabled]="currentPage === totalPage">
+        <svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.917969 0L5.0013 4.08333L0.917969 8.16667" stroke="#2A39EA" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+    </li>
+  </ul>
+</div>
